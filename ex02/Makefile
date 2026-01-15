@@ -69,17 +69,17 @@ byebye:(
 endef
 export RAT
 export GOODBYE
-SRCS = Zombie.cpp main.cpp zombieHorde.cpp
+SRCS = main.cpp
 OBJECTS = ${SRCS:.cpp=.o}
 OBJDIR = obj
 OBJECTFILES = $(addprefix $(OBJDIR)/, $(OBJECTS))
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -g -std=c++98
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 $(OBJDIR)/%.o: %.cpp
 	@mkdir -p $(OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJECTFILES) Zombie.hpp
+$(NAME): $(OBJECTFILES)
 	@$(CC) $(CFLAGS)  $(OBJECTFILES) -o $(NAME)
 	@printf "$$RAT"
 
