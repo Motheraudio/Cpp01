@@ -73,14 +73,15 @@ SRCS = Zombie.cpp newZombie.cpp randomChump.cpp main.cpp
 OBJECTS = ${SRCS:.cpp=.o}
 OBJDIR = obj
 OBJECTFILES = $(addprefix $(OBJDIR)/, $(OBJECTS))
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+HEADERS = ${SRCS:.cpp=.d}
+CXX = c++
+CXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
 $(OBJDIR)/%.o: %.cpp
 	@mkdir -p $(OBJDIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CXX) $(CXFLAGS) -c $< -o $@
 
-$(NAME): $(OBJECTFILES) Zombie.hpp
-	@$(CC) $(CFLAGS)  $(OBJECTFILES) -o $(NAME)
+$(NAME): $(OBJECTFILES)
+	@$(CXX) $(CXFLAGS)  $(OBJECTFILES) -o $(NAME)
 	@printf "$$RAT"
 
 all: $(NAME)
@@ -93,5 +94,5 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
-
+-include $(HEADERS)
 .PHONY: all clean fclean re

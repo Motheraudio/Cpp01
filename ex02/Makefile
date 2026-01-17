@@ -73,14 +73,14 @@ SRCS = main.cpp
 OBJECTS = ${SRCS:.cpp=.o}
 OBJDIR = obj
 OBJECTFILES = $(addprefix $(OBJDIR)/, $(OBJECTS))
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CXX = c++
+CXFLAGS = -Wall -Wextra -Werror -std=c++98
 $(OBJDIR)/%.o: %.cpp
 	@mkdir -p $(OBJDIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CXX) $(CXFLAGS) -c $< -o $@
 
 $(NAME): $(OBJECTFILES)
-	@$(CC) $(CFLAGS)  $(OBJECTFILES) -o $(NAME)
+	@$(CXX) $(CXFLAGS)  $(OBJECTFILES) -o $(NAME)
 	@printf "$$RAT"
 
 all: $(NAME)
